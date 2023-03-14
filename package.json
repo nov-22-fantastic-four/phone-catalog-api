@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts",
-    "build": "node src/index.ts",
+    "dev": "nodemon src/index.ts",
+    "start": "node src/index.js",
+    "build": "npm i && tsc",
     "lint": "eslint src/. --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
