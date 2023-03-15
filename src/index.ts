@@ -5,9 +5,6 @@ import 'dotenv/config';
 const app = express();
 
 app.use(cors());
+app.use(express.static('public'));
 
-app.use('/', (req, res) => {
-  res.send('Hello there');
-});
-
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 5000);
