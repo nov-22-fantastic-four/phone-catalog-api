@@ -17,6 +17,8 @@
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/no-floating-promises": "warn",
         "@typescript-eslint/prefer-nullish-coalescing": "off",
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/promise-function-async": "off",
         "indent": ["error", 2],
         "max-len": ["error", { "code": 80,
             "comments": 80,
