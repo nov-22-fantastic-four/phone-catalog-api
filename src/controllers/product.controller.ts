@@ -31,3 +31,9 @@ export const getOne: Handler = async(req, res) => {
 
   res.send(product);
 };
+
+export const getNew: Handler = async(req, res) => {
+  const newProducts = await productService.getNew();
+
+  res.send(newProducts);
+};
