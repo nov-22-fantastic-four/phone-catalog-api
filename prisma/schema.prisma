@@ -10,6 +10,7 @@ datasource db {
 
 model Phone {
   id                String        @id
+  productId         Int           @unique
   name              String
   namespaceId       String
   capacityAvailable String[]
@@ -27,6 +28,8 @@ model Phone {
   camera            String
   zoom              String
   cell              String[]
+
+  product Product @relation(fields: [productId], references: [id])
 }
 
 model Description {
@@ -40,7 +43,7 @@ model Description {
 model Product {
   id        Int    @id @default(autoincrement())
   category  String
-  itemId    String
+  itemId    String @unique
   name      String
   fullPrice Float
   price     Float
@@ -50,4 +53,6 @@ model Product {
   ram       String
   year      Int
   image     String
+
+  phone Phone?
 }
