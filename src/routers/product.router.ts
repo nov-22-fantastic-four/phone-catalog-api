@@ -10,6 +10,6 @@ router.get('/new', productController.getNew);
 router.get('/discount', productController.getDiscounted);
 
 router.get('/:id', productController.getOne);
-router.get('/:id/recommended', productController.getNew);
+router.get('/:id/recommended', productController.getRecommended);
 
 export default router;
