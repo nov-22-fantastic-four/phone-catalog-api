@@ -23,9 +23,14 @@ export const getById = async(id: number): Promise<Product | null> => (
 export const getNew = async(): Promise<Product[]> => (
   await prisma.product.findMany({
     where: { category: 'phones' },
-    orderBy: {
-      year: 'desc'
-    },
+    orderBy: [
+      {
+        year: 'desc'
+      },
+      {
+        price: 'desc'
+      }
+    ],
     take: 16
   })
 );
