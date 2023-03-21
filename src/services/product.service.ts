@@ -1,15 +1,17 @@
 import { PrismaClient, type Product } from '@prisma/client';
+import { type ParsedQs } from 'qs';
+import { getRandomIds, prepareArgsWithQuery } from './product.utils';
 
 const prisma = new PrismaClient();
 
+export const getAll = async(query: ParsedQs): Promise<Product[]> => {
+  const args = prepareArgsWithQuery(query);
+
+  return prisma.product.findMany(args);
+};
+
 export const getCount = async(): Promise<number> => (
   await prisma.product.count({
-    where: { category: 'phones' }
-  })
-);
-
-export const getAll = async(): Promise<Product[]> => (
-  await prisma.product.findMany({
     where: { category: 'phones' }
   })
 );
@@ -44,16 +46,15 @@ export const getDiscounted = async(): Promise<Product[]> => (
     LIMIT 16;
 `);
 
-export const getWithPagination = (
-  page: number,
-  perPage: number
-): Promise<Product[]> => {
-  const skip = (page - 1) * perPage;
-  const take = perPage;
+export const getRecommended = async(id: number): Promise<Product[]> => {
+  const ids = getRandomIds(id);
 
   return prisma.product.findMany({
-    skip,
-    take,
-    where: { category: 'phones' }
+    where: {
+      id: {
+        in: ids
+      }
+    },
+    take: 16
   });
 };

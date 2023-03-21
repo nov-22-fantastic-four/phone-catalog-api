@@ -2,18 +2,8 @@ import { type Handler } from 'express';
 import * as productService from '../services/product.service';
 
 export const getAll: Handler = async(req, res) => {
-  const { page = 1, perPage } = req.query;
-
-  if (perPage === undefined) {
-    const products = await productService.getAll();
-
-    return res.send(products);
-  }
-
-  const products = await productService.getWithPagination(
-    Number(page),
-    Number(perPage)
-  );
+  const query = req.query;
+  const products = await productService.getAll(query);
 
   res.send(products);
 };
@@ -42,4 +32,12 @@ export const getDiscounted: Handler = async(req, res) => {
   const discountedProducts = await productService.getDiscounted();
 
   res.send(discountedProducts);
+};
+
+export const getRecommended: Handler = async(req, res) => {
+  const { id } = req.params;
+
+  const recommended = await productService.getRecommended(Number(id));
+
+  res.send(recommended);
 };
