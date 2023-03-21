@@ -37,3 +37,9 @@ export const getNew: Handler = async(req, res) => {
 
   res.send(newProducts);
 };
+
+export const getDiscounted: Handler = async(req, res) => {
+  const discountedProducts = await productService.getDiscounted();
+
+  res.send(discountedProducts);
+};

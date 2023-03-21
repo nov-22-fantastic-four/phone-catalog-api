@@ -30,6 +30,15 @@ export const getNew = async(): Promise<Product[]> => (
   })
 );
 
+export const getDiscounted = async(): Promise<Product[]> => (
+  await prisma.$queryRaw`
+    SELECT *,
+      ("fullPrice" - "price") AS discount
+    FROM "Product"
+    ORDER BY discount DESC
+    LIMIT 16;
+`);
+
 export const getWithPagination = (
   page: number,
   perPage: number
